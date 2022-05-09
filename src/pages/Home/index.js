@@ -24,7 +24,7 @@ const Home = () => {
         <Text> IF Atento </Text>
       </View>
       <View style={styles.main}>
-        <Button appearance="outline" onPress={executaNavegacaoParaMapa}>
+        <Button appearance="filled" onPress={executaNavegacaoParaMapa}>
           Clique Aqui!
         </Button>
       </View>

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, {Marker, Polygon} from "react-native-maps";
 
 import { Layout, BottomNavigation , BottomNavigationTab, Icon, Button} from "@ui-kitten/components";
+import { useNavigation } from "@react-navigation/native";
 
 const mapIcon = (props) => (
   <Icon {...props} name='map-outline'/>
@@ -12,14 +13,14 @@ const infoIcon = (props) => (
   <Icon {...props} name='info-outline'/>
 );
 
+
 export default function Maps() {
   const [nomeSetor, setNomeSetor] = useState("");
-
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} mapType="hybrid" minZoomLevel={15} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={false} 
+      <MapView style={styles.map} mapType="hybrid" minZoomLevel={17} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={false} 
         initialRegion={{
           latitude: -21.350371,
           longitude: -46.528377,
@@ -55,7 +56,7 @@ export default function Maps() {
       <Layout style={styles.footer} level="1">
         <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
           <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
-          <BottomNavigationTab title='SOBRE' icon={infoIcon}/>
+          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} />
         </BottomNavigation>
       </Layout>
     </View>
@@ -63,10 +64,14 @@ export default function Maps() {
 }
 
 function SetorSelecionado(props){
+  const navegacao = useNavigation();
+  function navegacaoParaRegistroPatologia(nomeSetor){
+    navegacao.navigate("PathologyRegistry", {nomeSetor: nomeSetor});
+  }
   return (
     <View style={styles.containerSetorSelecionado}>
       <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
-      <Button>REGISTRAR PATOLOGIA</Button>
+      <Button onPressIn={navegacaoParaRegistroPatologia(props.nomeSetor)}>REGISTRAR PATOLOGIA</Button>
     </View>
   )
 }

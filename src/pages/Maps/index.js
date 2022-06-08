@@ -2,10 +2,21 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, {Marker, Polygon} from "react-native-maps";
 
-import { Layout, BottomNavigation , BottomNavigationTab, Button} from "@ui-kitten/components";
+import { Layout, BottomNavigation , BottomNavigationTab, Icon, Button} from "@ui-kitten/components";
+
+const mapIcon = (props) => (
+  <Icon {...props} name='map-outline'/>
+);
+
+const infoIcon = (props) => (
+  <Icon {...props} name='info-outline'/>
+);
 
 export default function Maps() {
   const [nomeSetor, setNomeSetor] = useState("");
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
   return (
     <View style={styles.container}>
       <MapView style={styles.map} mapType="hybrid" minZoomLevel={15} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={false} 
@@ -42,7 +53,10 @@ export default function Maps() {
         <SetorSelecionado nomeSetor={nomeSetor}></SetorSelecionado>
 
       <Layout style={styles.footer} level="1">
-        <Text>Menu Inferior</Text>
+        <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
+          <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
+          <BottomNavigationTab title='SOBRE' icon={infoIcon}/>
+        </BottomNavigation>
       </Layout>
     </View>
   );
@@ -50,10 +64,14 @@ export default function Maps() {
 
 function SetorSelecionado(props){
   return (
-    <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
+    <View style={styles.containerSetorSelecionado}>
+      <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
+      <Button>REGISTRAR PATOLOGIA</Button>
+    </View>
   )
-
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,9 +83,17 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
+  containerSetorSelecionado: {
+    flex: 2,
+    zIndex: 1000,
+    backgroundColor: "#fff",
+    bottom: 35,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   setor_selecionado : {
     position: "absolute",
-    bottom: 100,
+    bottom: 25,
     backgroundColor: "red",
     color: "white",
     zIndex: 2
@@ -79,4 +105,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     zIndex: 100,
   },
+  menuInferior: {
+    backgroundColor: "#FOFED2",
+    color: "#247106"
+  }
 });

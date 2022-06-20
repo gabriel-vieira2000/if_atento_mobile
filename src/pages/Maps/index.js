@@ -4,6 +4,7 @@ import MapView, {Marker, Polygon} from "react-native-maps";
 
 import { Layout, BottomNavigation , BottomNavigationTab, Icon, Button} from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const mapIcon = (props) => (
   <Icon {...props} name='map-outline'/>
@@ -14,11 +15,26 @@ const infoIcon = (props) => (
 );
 
 
+function navegaParaTela(tela, nomeSetor){
+    const navegacao = useNavigation();
+    if(tela == "About"){
+      navegacao.navigate("About");
+    }else{
+      navegacao.navigate("PathologyRegistry", {nomeSetor: nomeSetor});
+    }    
+}
+
 export default function Maps() {
   const [nomeSetor, setNomeSetor] = useState("");
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  
+  const navegacao = useNavigation();
+  function navegacaoParaSobre(){
+    navegacao.navigate("About");
+  }
 
   return (
+    <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
       <MapView style={styles.map} mapType="hybrid" minZoomLevel={17} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={false} 
         initialRegion={{
@@ -51,31 +67,27 @@ export default function Maps() {
           />
         </MapView>
         
-        <SetorSelecionado nomeSetor={nomeSetor}></SetorSelecionado>
+      <SetorSelecionado nomeSetor={nomeSetor}></SetorSelecionado>
 
       <Layout style={styles.footer} level="1">
         <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
           <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
-          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} />
+          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} onPress={navegaParaTela("About","")}/>
         </BottomNavigation>
       </Layout>
     </View>
+    </SafeAreaView>
   );
 }
 
 function SetorSelecionado(props){
-  const navegacao = useNavigation();
-  function navegacaoParaRegistroPatologia(nomeSetor){
-    navegacao.navigate("PathologyRegistry", {nomeSetor: nomeSetor});
-  }
   return (
     <View style={styles.containerSetorSelecionado}>
       <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
-      <Button onPressIn={navegacaoParaRegistroPatologia(props.nomeSetor)}>REGISTRAR PATOLOGIA</Button>
+      <Button onPressIn={navegaParaTela("PathologyRegistry",props.nomeSetor)}>REGISTRAR PATOLOGIA</Button>
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -107,11 +119,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 130,
     width: Dimensions.get("window").width,
-    backgroundColor: "#ccc",
+    backgroundColor: "#F0FED2",
     zIndex: 100,
   },
   menuInferior: {
-    backgroundColor: "#FOFED2",
+    backgroundColor: "#F0FED2",
     color: "#247106"
   }
 });

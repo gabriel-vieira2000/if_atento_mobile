@@ -5,6 +5,7 @@ import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "@ui-kitten/components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   const navegacao = useNavigation();
@@ -14,51 +15,77 @@ const Home = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.head}>
-        <Image
-          style={styles.logoIf}
-          resizeMode="contain"
-          source={require("../../assets/logo_if_muz.png")}
-        />
-        <Text> IF Atento </Text>
+    <SafeAreaView style={{flex:1}}>
+      <View style={styles.container}>
+        <View style={styles.head}>
+          <Image
+            style={styles.logoIf}
+            resizeMode="center"
+            source={require("../../assets/logo_if_atento.png")}
+            width={300}
+          />
+        </View>
+        <Text style={styles.textosMaiores}>Encontrou alguma patologia nas construções do Campus? </Text>
+        <View style={styles.main}>
+          <Text style={styles.textosMaiores}>Por gentileza, acesse o aplicativo por meio do botão abaixo e nos informe!</Text>
+          <Button style={styles.botaoEntrar} appearance="filled" onPress={executaNavegacaoParaMapa}>
+            ACESSAR
+          </Button>
+        </View>
+        <Text style={styles.textoRodape}>Instituto Federal - Campus Muzambinho</Text>
       </View>
-      <View style={styles.main}>
-        <Button appearance="filled" onPress={executaNavegacaoParaMapa}>
-          Clique Aqui!
-        </Button>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:"column",
     padding: 30,
-    backgroundColor: "#f0f0f5",
+    backgroundColor: "#F0FED2",
+    justifyContent: "center",
+    alignItems:"center",
   },
 
   head: {
     flex: 1,
     padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems:"center",
   },
 
   logoIf: {
     width: 350,
-    height: 450,
+    height: 350,
   },
 
   main: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+
+    
+  },
+
+  textosMaiores:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:"#247106",
+    textAlign:"center",
+    paddingVertical:10,
+    paddingHorizontal:5,
+  },
+  textoRodape:{
+    fontSize:11,
+    fontWeight:"bold",
+    color:"#247106",
   },
 
   botaoEntrar: {
-    backgroundColor: "#77dd77",
+    backgroundColor: "#247106",
+    height:80,
+    width:200,
+    fontSize:18,
   },
 });
 export default Home;

@@ -14,6 +14,8 @@ const infoIcon = (props) => (
   <Icon {...props} name='info-outline'/>
 );
 
+var setorSelecionado = "";
+
 
 function navegaParaTela(tela, nomeSetor){
     const navegacao = useNavigation();
@@ -27,11 +29,6 @@ function navegaParaTela(tela, nomeSetor){
 export default function Maps() {
   const [nomeSetor, setNomeSetor] = useState("");
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  
-  const navegacao = useNavigation();
-  function navegacaoParaSobre(){
-    navegacao.navigate("About");
-  }
 
   return (
     <SafeAreaView style={{flex:1}}>
@@ -49,7 +46,7 @@ export default function Maps() {
             {name: "predioInfo2", latitude: -21.350605, longitude: -46.526832},
             {name: "predioInfo3", latitude: -21.350980, longitude: -46.526956},
             {name: "predioInfo4", latitude: -21.350854, longitude: -46.527341},
-          ]} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" onPress={() => {setNomeSetor("Prédio de Informática")}} tappable={true}
+          ]} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" onPress={() => {setNomeSetor("Prédio de Informática"); setorSelecionado="Prédio de Informática - TTTTT";}} tappable={true}
           />
           <Polygon coordinates={[
             {name: "refeitorio1", latitude: -21.350741, longitude: -46.527749},
@@ -84,7 +81,7 @@ function SetorSelecionado(props){
   return (
     <View style={styles.containerSetorSelecionado}>
       <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
-      <Button onPressIn={navegaParaTela("PathologyRegistry",props.nomeSetor)}>REGISTRAR PATOLOGIA</Button>
+      <Button>REGISTRAR PATOLOGIA</Button>
     </View>
   )
 }

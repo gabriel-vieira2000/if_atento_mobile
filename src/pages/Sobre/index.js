@@ -1,9 +1,25 @@
-import { Divider, TopNavigation, Layout } from "@ui-kitten/components";
+import { Divider, TopNavigation, Layout, BottomNavigation , BottomNavigationTab, Icon } from "@ui-kitten/components";
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const mapIcon = (props) => (
+    <Icon {...props} name='map-outline'/>
+);
+  
+const infoIcon = (props) => (
+    <Icon {...props} name='info-outline'/>
+);
+
 const Sobre = () => {
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+    const navegacao = useNavigation();
+    function navegaParaTela() {
+        navegacao.navigate("Map");
+    }
+
     return (
         <SafeAreaView style={{flex:1}}>
         <TopNavigation style={styles.barraTopo} title="Sobre" alignment="center"/>
@@ -12,6 +28,7 @@ const Sobre = () => {
                 <Text style={styles.textoSobrePesquisa}>Este Aplicativo faz parte da pesquisa entitulada "IF Atento: software de análise e visualização de dados de patologias nas construções em uma instituição de ensino a partir de um aplicativo de informação geográfica voluntária."</Text>
                 <Text style={styles.textoContribuicao}>Por meio dos dados obtidos a partir desse aplicativo, pretende-se realizar uma análise dos mesmos de forma que ofereçam subsídios para tomadas de decisão em relação às patologias encontradas. Portanto, sua ajuda será de grande valia!</Text>
             </View>
+            <Divider style={styles.divisor}/>
             <View style={styles.quadroInformacoes}>
                 <Text style={styles.tituloInformacao}>Autor:</Text>
                 <Text style={styles.conteudoInformacao}>Gabriel Vieira Cardoso</Text>
@@ -22,6 +39,13 @@ const Sobre = () => {
                 <Text style={styles.tituloInformacao}>Instituição:</Text>
                 <Text style={styles.conteudoInformacao}>IFSULDEMINAS - Campus Muzambinho</Text>
             </View>
+        </Layout>
+
+        <Layout style={styles.footer} level="1">
+            <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
+                <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon} onPress={navegaParaTela}/>
+                <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon}/>
+            </BottomNavigation>
         </Layout>
         </SafeAreaView>
     );
@@ -36,7 +60,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         flexDirection:"column",
-        justifyContent:"space-evenly",
+        justifyContent:"flex-start",
         alignItems: "center",
         backgroundColor: "white",
     },
@@ -80,13 +104,27 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         paddingTop:5,
     },
+    divisor:{
+        paddingVertical:40,
+    },
     conteudoInformacao:{
         color:"#247106",
         fontSize:16,
         fontWeight:"bold",
         paddingBottom:5,
-    }
+    },
 
+    footer: {
+        bottom: 0,
+        height: "auto",
+        width: Dimensions.get("window").width,
+        backgroundColor: "white",
+        zIndex: 100,
+    },
+    menuInferior: {
+        backgroundColor: "#F0FED2",
+        color: "#247106"
+    }
 });
 
 export default Sobre;

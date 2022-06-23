@@ -13,9 +13,9 @@ const infoIcon = (props) => (
 );
 
 const Sobre = () => {
+    const navegacao = useNavigation();
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-    const navegacao = useNavigation();
     function navegaParaTela() {
         navegacao.navigate("Map");
     }
@@ -43,7 +43,7 @@ const Sobre = () => {
 
         <Layout style={styles.footer} level="1">
             <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
-                <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon} onPress={navegaParaTela}/>
+                <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon} onPress={navegaParaTela()}/>
                 <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon}/>
             </BottomNavigation>
         </Layout>

@@ -38,7 +38,7 @@ const RegistroPatologia = ({route}) => {
                     <Text style={styles.textoTituloSetor}>Selecione o tipo de patologia encontrada:</Text>
                     <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);}}>
                         {patologia.map(patologia => (
-                           <SelectItem title={patologia.nomePatologia}/> 
+                           <SelectItem key={patologia.idPatologia} title={patologia.nomePatologia}/> 
                         ))}
                     </Select>
                     <Text style={styles.textoRodape}>Você deve selecionar uma opção dentre as apresentadas que se enquadra com o que você está vendo!</Text>
@@ -62,12 +62,12 @@ const RegistroPatologia = ({route}) => {
                 </View>
                 <View style={styles.containerGrupoCentralizado}>
                     <Text style={styles.textoBotao}>Após preencher todas as informações acima, por favor clique no botão abaixo!</Text>
-                    <Button appearance="filled" onPress={async () => {
+                    <Button appearance="filled" onPress={() => {
                         const gTipoPatologia = tipoPatologia.row;
                         const gTempoPatologia = tempoPatologia.row;
                         const gUrgencia = urgencia;
                         console.log(`${gTipoPatologia} - ${gTempoPatologia} - ${gUrgencia}`);
-                        try {
+                        /*try {
                             await axios.post('/patologias', {
                                 tipoPatologia:gTipoPatologia,
                                 tempoPatologia:gTempoPatologia,
@@ -77,7 +77,7 @@ const RegistroPatologia = ({route}) => {
                         } catch (error) {
                             console.log(error);
                             navegacao.navigate("SavedRegistry");
-                        }
+                        }*/
                          
                         
                     }}>SALVAR REGISTRO</Button>

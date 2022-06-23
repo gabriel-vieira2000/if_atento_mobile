@@ -33,7 +33,7 @@ const Maps = () => {
   function SetorSelecionado(props){
     return (
       <View style={styles.containerSetorSelecionado}>
-        <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
+        <Text style={styles.setor_selecionado}>Setor Selecionado: {props.nomeSetor}</Text>
         <Button onPress={() => {navegaParaRegistroPatologia()}}>REGISTRAR PATOLOGIA</Button>
       </View>
     )
@@ -132,7 +132,14 @@ const Maps = () => {
             {name: "deposito2", latitude: -21.351001, longitude: -46.526692},
             {name: "deposito3", latitude: -21.350701, longitude: -46.526595},
             {name: "deposito4", latitude: -21.350627, longitude: -46.526826},
-          ]} strokeWidth={2} strokeColor="rgba(98,204,225,1)" fillColor="rgba(98,204,225,0.3)" onPress={() => {setNomeSetor("Depósito");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(98,204,225,1)" fillColor="rgba(98,204,225,0.3)" onPress={() => {setNomeSetor("Depósito");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776});navegaParaSobre()}} tappable={true} 
+          />
+          <Polygon coordinates={[
+            {name: "cead1", latitude: -21.351043, longitude: -46.526680},
+            {name: "cead2", latitude: -21.351094, longitude: -46.526459},
+            {name: "cead3", latitude: -21.350849, longitude: -46.526392},
+            {name: "cead4", latitude: -21.350824, longitude: -46.526593},
+          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetor("CEAD");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776})}} tappable={true} 
           />
 
         </MapView>
@@ -141,7 +148,7 @@ const Maps = () => {
       <Layout style={styles.footer} level="1">
         <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
           <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
-          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} onPress={navegaParaSobre}/>
+          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} />
         </BottomNavigation>
       </Layout>
     </View>
@@ -173,9 +180,11 @@ const styles = StyleSheet.create({
   setor_selecionado : {
     position: "absolute",
     bottom: 25,
-    backgroundColor: "red",
-    color: "white",
-    zIndex: 2
+    fontWeight:"bold",
+    backgroundColor: "#F0FED2",
+    color: "#247106",
+    zIndex: 2,
+    borderRadius:3,
   },
   footer: {
     bottom: 0,

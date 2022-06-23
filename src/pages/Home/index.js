@@ -22,7 +22,6 @@ const Home = () => {
             style={styles.logoIf}
             resizeMode="center"
             source={require("../../assets/logo_if_atento.png")}
-            width={300}
           />
         </View>
         <Text style={styles.textosMaiores}>Encontrou alguma patologia nas construções do Campus?</Text>
@@ -57,6 +56,8 @@ const styles = StyleSheet.create({
   logoIf: {
     width: 350,
     height: 350,
+    aspectRatio:1,
+    resizeMode:"cover",
   },
 
   main: {

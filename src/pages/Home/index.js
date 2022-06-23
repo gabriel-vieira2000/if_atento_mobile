@@ -25,7 +25,7 @@ const Home = () => {
             width={300}
           />
         </View>
-        <Text style={styles.textosMaiores}>Encontrou alguma patologia nas construções do Campus? </Text>
+        <Text style={styles.textosMaiores}>Encontrou alguma patologia nas construções do Campus?</Text>
         <View style={styles.main}>
           <Text style={styles.textosMaiores}>Por gentileza, acesse o aplicativo por meio do botão abaixo e nos informe!</Text>
           <Button style={styles.botaoEntrar} appearance="filled" onPress={executaNavegacaoParaMapa}>
@@ -62,9 +62,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-
-    
+    alignItems: "center", 
   },
 
   textosMaiores:{

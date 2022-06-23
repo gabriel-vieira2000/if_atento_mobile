@@ -8,11 +8,16 @@ import api from "../../services/api";
 
 const RegistroPatologia = ({route}) => {
     const navegacao = useNavigation();
+
     const {nomeSetor} = route.params;
-    const teste = "Prédio de Informática";
+
     const [tipoPatologia, setTipoPatologia] = useState(new IndexPath(0));
+    const tiposPatologias = ["Rachadura", "Infiltração"];
+
     const [tempoPatologia, setTempoPatologia] = useState(new IndexPath(0));
-    const [urgencia, setUrgencia] = useState(0);
+    const temposPatologias = ["Primeira Vez que Vi", "Comecei a ver recentemente (< 1 ano)", "Já vejo a muito tempo (> 1 ano)"]
+
+    const [urgencia, setUrgencia] = useState(1);
 
     const [patologia, setPatologia] = useState([]);
     useEffect(() => {
@@ -31,7 +36,7 @@ const RegistroPatologia = ({route}) => {
                 </View>
                 <View style={styles.containerGrupo}>
                     <Text style={styles.textoTituloSetor}>Selecione o tipo de patologia encontrada:</Text>
-                    <Select selectedIndex={tipoPatologia} onSelect={selecao => setTipoPatologia(selecao)}>
+                    <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);}}>
                         {patologia.map(patologia => (
                            <SelectItem title={patologia.nomePatologia}/> 
                         ))}
@@ -40,7 +45,7 @@ const RegistroPatologia = ({route}) => {
                 </View>
                 <View style={styles.containerGrupo}>
                     <Text style={styles.textoTituloSetor}>Há quanto tempo você vê tal patologia?</Text>
-                    <Select selectedIndex={tempoPatologia} onSelect={selecao => setTempoPatologia(selecao)}>
+                    <Select selectedIndex={tempoPatologia} value={temposPatologias[tempoPatologia.row]} onSelect={selecao => setTempoPatologia(selecao)}>
                         <SelectItem style={styles.selecao} title="Primeira Vez que Vi"/>
                         <SelectItem style={styles.selecao} title="Comecei a ver recentemente (< 1 ano)"/>
                         <SelectItem style={styles.selecao} title="Já vejo a muito tempo? ( > 1 ano) "/>

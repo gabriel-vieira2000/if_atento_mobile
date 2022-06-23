@@ -22,19 +22,19 @@ const Maps = () => {
   const navegacao = useNavigation();
   const [coordenadasMarcador, setCoordenadasMarcador] = useState("");
 
-  function navegaParaTela(tela){
-    if(tela == "About"){
-      navegacao.navigate("About");
-    }else{
-      navegacao.navigate("PathologyRegistry", {nomeSetor: nomeSetor});
-    }    
+  function navegaParaRegistroPatologia(){
+    navegacao.navigate("PathologyRegistry", {nomeSetor: nomeSetor});    
+  }
+
+  function navegaParaSobre(){
+    navegacao.navigate("About");
   }
 
   function SetorSelecionado(props){
     return (
       <View style={styles.containerSetorSelecionado}>
         <Text style={styles.setor_selecionado}>{props.nomeSetor}</Text>
-        <Button onPress={() => {navegaParaTela("PathologyRegistry")}}>REGISTRAR PATOLOGIA</Button>
+        <Button onPress={() => {navegaParaRegistroPatologia()}}>REGISTRAR PATOLOGIA</Button>
       </View>
     )
   }
@@ -49,13 +49,13 @@ const Maps = () => {
           latitudeDelta: 0.002,
           longitudeDelta: 0.009,
         }}> 
-          <Marker coordinate={coordenadasMarcador}/>
+          {coordenadasMarcador.latitude != null ? <Marker coordinate={coordenadasMarcador}/> : null}
           <Polygon coordinates={[
             {name: "predioInfo1", latitude: -21.350482, longitude: -46.527217},
             {name: "predioInfo2", latitude: -21.350605, longitude: -46.526832},
             {name: "predioInfo3", latitude: -21.350980, longitude: -46.526956},
             {name: "predioInfo4", latitude: -21.350854, longitude: -46.527341},
-          ]} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" onPress={() => {setNomeSetor("Prédio de Informática")}} tappable={true}
+          ]} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" onPress={() => {setNomeSetor("Prédio de Informática"); setCoordenadasMarcador({latitude:-21.350741,longitude:-46.527102})}} tappable={true}
           />
           <Polygon coordinates={[
             {name: "refeitorio1", latitude: -21.350741, longitude: -46.527749},
@@ -78,7 +78,7 @@ const Maps = () => {
       <Layout style={styles.footer} level="1">
         <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
           <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
-          <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} onPress={() => navegaParaTela("About")}/>
+          <BottomNavigationTab onPress={() => navegaParaSobre()} style={styles.menuInferior} title='SOBRE' icon={infoIcon}/>
         </BottomNavigation>
       </Layout>
     </View>

@@ -23,9 +23,6 @@ const RegistroSalvo = () => {
                 <Text style={styles.texto}>Agradecemos imensamente pelas informações prestadas!</Text>
                 <Text style={styles.texto}>Clique abaixo em voltar para visualizar o mapa da instituição novamente e continuar contribuindo.</Text>
                 <Button style={styles.botaoVoltar} onPress={() => navigation.navigate('Map')}>VOLTAR</Button>
-                {patologias.map(patologia => (
-                    <Text key={patologia.idPatologia} style={styles.texto}>{patologia.nomePatologia} - {patologia.descricaoPatologia}</Text>
-                ))}
             </Layout>
         </SafeAreaView>
     );

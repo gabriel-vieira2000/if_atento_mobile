@@ -21,7 +21,7 @@ const RegistroPatologia = ({route}) => {
 
     const [patologia, setPatologia] = useState([]);
     useEffect(() => {
-        api.get('patologias').then(respostaAPI => {
+        api.get('/patologias').then(respostaAPI => {
             setPatologia(respostaAPI.data);
         });
     }, []);
@@ -62,23 +62,26 @@ const RegistroPatologia = ({route}) => {
                 </View>
                 <View style={styles.containerGrupoCentralizado}>
                     <Text style={styles.textoBotao}>Após preencher todas as informações acima, por favor clique no botão abaixo!</Text>
-                    <Button appearance="filled" onPress={() => {
+                    <Button appearance="filled" onPress={async () => {
                         const gTipoPatologia = tipoPatologia.row;
                         const gTempoPatologia = tempoPatologia.row;
                         const gUrgencia = urgencia;
                         console.log(`${gTipoPatologia} - ${gTempoPatologia} - ${gUrgencia}`);
-                        /*try {
-                            await axios.post('/patologias', {
-                                tipoPatologia:gTipoPatologia,
-                                tempoPatologia:gTempoPatologia,
-                                urgencia:gUrgencia,
-                            });
-                            navegacao.navigate("SavedRegistry");
-                        } catch (error) {
-                            console.log(error);
-                            navegacao.navigate("SavedRegistry");
-                        }*/
-                         
+                            
+                        await api.post("/patologias", {
+                            nomeSetor: nomeSetor,
+                            tipoPatologia: gTipoPatologia,
+                            tempoPatologia: gTempoPatologia,
+                            urgencia: gUrgencia,
+                        }).then(response => console.log(response))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                            }
+                        });
+                        navegacao.navigate("SavedRegistry");
                         
                     }}>SALVAR REGISTRO</Button>
                 </View>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Text, Image, View, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
@@ -7,11 +7,21 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import api from '../../services/api';
+
 const Home = () => {
   const navegacao = useNavigation();
+  const [setores, setSetores] = useState([]);
+  useEffect(() => {
+    console.log("Entrou no Effect");
+    api.get('/setores').then(respostaAPI => {
+        //console.log(respostaAPI.data)
+        setSetores(respostaAPI.data);
+    });
+  }, []);
 
   function executaNavegacaoParaMapa() {
-    navegacao.navigate("Map");
+    navegacao.navigate("Map", {setores:setores});
   }
 
   return (

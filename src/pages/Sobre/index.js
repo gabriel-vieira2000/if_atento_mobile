@@ -1,5 +1,5 @@
 import { Divider, TopNavigation, Layout, BottomNavigation , BottomNavigationTab, Icon } from "@ui-kitten/components";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +14,11 @@ const infoIcon = (props) => (
 
 const Sobre = () => {
     const navegacao = useNavigation();
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(1);
+
+    useEffect(() => {
+        setSelectedIndex(1);
+    }, []);
 
     function navegaParaTela() {
         navegacao.navigate("Map");
@@ -42,8 +46,8 @@ const Sobre = () => {
         </Layout>
 
         <Layout style={styles.footer} level="1">
-            <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
-                <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon} onPress={navegaParaTela()}/>
+            <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => {setSelectedIndex(index);if(index == 0){navegaParaTela();}}}>
+                <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon} onPress={() => {navegaParaTela()}}/>
                 <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon}/>
             </BottomNavigation>
         </Layout>

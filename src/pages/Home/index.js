@@ -7,21 +7,22 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import api from '../../services/api';
+//import api from '../../services/api';
 
 const Home = () => {
   const navegacao = useNavigation();
-  const [setores, setSetores] = useState([]);
-  useEffect(() => {
+  //const [setores, setSetores] = useState([]);
+  {/*useEffect(() => {
     console.log("Entrou no Effect");
     api.get('/setores').then(respostaAPI => {
         //console.log(respostaAPI.data)
         setSetores(respostaAPI.data);
     });
-  }, []);
+  }, []);*/}
 
   function executaNavegacaoParaMapa() {
-    navegacao.navigate("Map", {setores:setores});
+    navegacao.navigate("Map");
+    //navegacao.navigate("Map", {setores:setores});
   }
 
   return (

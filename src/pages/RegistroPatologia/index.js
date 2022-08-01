@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Layout, TopNavigation, Button, Select, IndexPath, SelectItem, Radio, RadioGroup, Input } from "@ui-kitten/components";
 import React, {useState, useEffect} from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Camera } from "expo-camera";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -24,16 +25,19 @@ const RegistroPatologia = ({route}) => {
 
     const [patologia, setPatologia] = useState([]);
 
+    
+
     useEffect(() => {
         api.get('/patologias').then(respostaAPI => {
             setPatologia(respostaAPI.data);
         });
+        
     }, []);
 
     return (
         <SafeAreaView style={{flex:1}}>
+            <TopNavigation style={styles.barraTopo} title="REGISTRAR PATOLOGIA" alignment="center"/>
             <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'} style={{flex:1}} showsVerticalScrollIndicator={false}>
-                <TopNavigation style={styles.barraTopo} title="REGISTRAR PATOLOGIA" alignment="center"/>
                 <Layout style={styles.container}>
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Setor ou Localidade Selecionada:</Text>
@@ -64,6 +68,10 @@ const RegistroPatologia = ({route}) => {
                             <Radio>NÃO</Radio>
                         </RadioGroup>
                         <Text style={styles.textoRodape}>Por padrão a urgência da patologia está selecionada como negativa. Caso ache que ela precise ser solucionada com urgência, troque a opção para SIM!</Text>
+                    </View>
+                    <View style={styles.containerGrupo}>
+                        <Text style={styles.textoTituloSetor}>Por gentileza nos envie uma foto da patologia abaixo:</Text>
+                        <Button appearance="filled" onPress={() => {navegacao.navigate("PathologyRegistryCamera")}}>ABRIR CÂMERA</Button>
                     </View>
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Algum detalhe ou observação?</Text>

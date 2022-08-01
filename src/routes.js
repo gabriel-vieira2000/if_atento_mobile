@@ -7,6 +7,7 @@ import Maps from "./pages/Maps";
 import Sobre from "./pages/Sobre";
 import RegistroPatologia from "./pages/RegistroPatologia";
 import RegistroSalvo from "./pages/RegistroSalvo";
+import CameraPatologiaRegistro from "./pages/CameraRegistroPatologia";
 
 const AppStack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const Routes = () => {
         <AppStack.Screen name="Map" component={Maps} />
         <AppStack.Screen name="About" component={Sobre} />
         <AppStack.Screen name="PathologyRegistry" component={RegistroPatologia} />
+        <AppStack.Screen name="PathologyRegistryCamera" component={CameraPatologiaRegistro} />
         <AppStack.Screen name="SavedRegistry" component={RegistroSalvo} />
       </AppStack.Navigator>
     </NavigationContainer>

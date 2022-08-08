@@ -388,20 +388,20 @@ const Maps = ({route}) => {
             {name: "quadraEsportes2", latitude: -21.349178, longitude:-46.528818},
             {name: "quadraEsportes3", latitude: -21.349054, longitude:-46.528989},
             {name: "quadraEsportes4", latitude: -21.349280, longitude:-46.529166},
-          ]} strokeWidth={2} strokeColor="rgba(141,199,78,1)" fillColor="rgba(32,99,178,0.3)" onPress={() => {setNomeSetorSelecionado("Quadra de Esportes");setCoordenadasMarcador({latitude: -21.349367, longitude: -46.528809})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(141,199,78,1)" fillColor="rgba(32,99,178,0.3)" onPress={() => {setNomeSetorSelecionado("Quadra de Esportes");setCoordenadasMarcador({latitude: -21.349222, longitude: -46.528979})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.349367, longitude: -46.528809}} tracksViewChanges={false}>
-            <Text style={{fontSize:6,fontWeight:"bold",color:"rgba(32,99,178,1)"}}>Quadra de Esportes</Text>
+          <Marker coordinate={{latitude: -21.349222, longitude: -46.528979}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(32,99,178,1)"}}>Quadra de Esportes</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "espacoConvivencia1", latitude: -21.349206, longitude:-46.529206},
             {name: "espacoConvivencia2", latitude: -21.349069, longitude:-46.529409},
             {name: "espacoConvivencia3", latitude: -21.348903, longitude:-46.529263},
             {name: "espacoConvivencia4", latitude: -21.349076, longitude:-46.529013},
-          ]} strokeWidth={2} strokeColor="rgba(232,199,148,1)" fillColor="rgba(232,199,148,0.3)" onPress={() => {setNomeSetorSelecionado("Espaço de Convivência");setCoordenadasMarcador({latitude: -21.349367, longitude: -46.528809})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(232,199,148,1)" fillColor="rgba(232,199,148,0.3)" onPress={() => {setNomeSetorSelecionado("Espaço de Convivência");setCoordenadasMarcador({latitude: -21.349057, longitude: -46.529237})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.349367, longitude: -46.528809}} tracksViewChanges={false}>
-            <Text style={{fontSize:6,fontWeight:"bold",color:"rgba(232,199,148,1)"}}>Espaço de Convivência</Text>
+          <Marker coordinate={{latitude: -21.349057, longitude: -46.529237}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(232,199,148,1)"}}>Espaço de Convivência</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "alojamentoA1", latitude: -21.349330, longitude:-46.529303},
@@ -418,27 +418,84 @@ const Maps = ({route}) => {
             {name: "alojamentoB2", latitude: -21.349360, longitude:-46.529911},
             {name: "alojamentoB3", latitude: -21.349520, longitude:-46.530046},
             {name: "alojamentoB4", latitude: -21.349832, longitude:-46.529624},
-          ]} strokeWidth={2} strokeColor="rgba(132,99,218,1)" fillColor="rgba(132,99,218,0.3)" onPress={() => {setNomeSetorSelecionado("Alojamento Masculino Bloco B");setCoordenadasMarcador({latitude: -21.349367, longitude: -46.528809})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(98,199,118,1)" fillColor="rgba(98,199,118,0.3)" onPress={() => {setNomeSetorSelecionado("Alojamento Masculino Bloco B");setCoordenadasMarcador({latitude: -21.349593, longitude: -46.529758})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.349367, longitude: -46.528809}} tracksViewChanges={false}>
-            <Text style={{fontSize:6,fontWeight:"bold",color:"rgba(132,99,218,1)"}}>Alojamento Masculino Bloco B</Text>
+          <Marker coordinate={{latitude: -21.349593, longitude: -46.529758}} tracksViewChanges={false}>
+            <Text style={{fontSize:8,fontWeight:"bold",color:"rgba(98,199,118,1)"}}>Alojamento Masculino Bloco B</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "alojamentoC1", latitude: -21.350102, longitude:-46.529708},
             {name: "alojamentoC2", latitude: -21.349787, longitude:-46.530182},
             {name: "alojamentoC3", latitude: -21.349970, longitude:-46.530311},
             {name: "alojamentoC4", latitude: -21.350280, longitude:-46.529871},
-          ]} strokeWidth={2} strokeColor="rgba(132,99,218,1)" fillColor="rgba(132,99,218,0.3)" onPress={() => {setNomeSetorSelecionado("Alojamento Feminino Bloco C");setCoordenadasMarcador({latitude: -21.349367, longitude: -46.528809})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(241,46,89,1)" fillColor="rgba(241,46,89,0.3)" onPress={() => {setNomeSetorSelecionado("Alojamento Feminino Bloco C");setCoordenadasMarcador({latitude: -21.350047, longitude: -46.530021})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.349367, longitude: -46.528809}} tracksViewChanges={false}>
-            <Text style={{fontSize:6,fontWeight:"bold",color:"rgba(132,99,218,1)"}}>Alojamento Feminino Bloco C</Text>
+          <Marker coordinate={{latitude: -21.350047, longitude: -46.530021}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(241,46,89,1)"}}>Alojamento Feminino Bloco C</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "pn061", latitude: -21.348890, longitude:-46.529714},
+            {name: "pn062", latitude: -21.348741, longitude:-46.529561},
+            {name: "pn063", latitude: -21.348664, longitude:-46.529680},
+            {name: "pn064", latitude: -21.348778, longitude:-46.529804},
+          ]} strokeWidth={2} strokeColor="rgba(241,46,89,1)" fillColor="rgba(241,46,89,0.3)" onPress={() => {setNomeSetorSelecionado("PN 06");setCoordenadasMarcador({latitude: -21.348773, longitude: -46.529700})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348773, longitude: -46.529700}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(241,46,89,1)"}}>PN 06</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "sae1", latitude: -21.348901, longitude:-46.529710},
+            {name: "sae2", latitude: -21.348798, longitude:-46.529830},
+            {name: "sae3", latitude: -21.348642, longitude:-46.529687},
+            {name: "sae4", latitude: -21.348746, longitude:-46.529544},
+          ]} strokeWidth={2} strokeColor="rgba(241,46,89,1)" fillColor="rgba(241,46,89,0.3)" onPress={() => {setNomeSetorSelecionado("Setor de Assistência ao Educando");setCoordenadasMarcador({latitude: -21.348773, longitude: -46.529700})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348773, longitude: -46.529700}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(241,46,89,1)"}}>Setor de Assistência ao Educando</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "museu1", latitude: -21.348701, longitude:-46.529942},
+            {name: "museu2", latitude: -21.348617, longitude:-46.530039},
+            {name: "museu3", latitude: -21.348520, longitude:-46.529950},
+            {name: "museu4", latitude: -21.348585, longitude:-46.529835},
+          ]} strokeWidth={2} strokeColor="rgba(41,46,189,1)" fillColor="rgba(41,46,189,0.3)" onPress={() => {setNomeSetorSelecionado("Museu Histórico");setCoordenadasMarcador({latitude: -21.348615, longitude: -46.529924})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348615, longitude: -46.529924}} tracksViewChanges={false}>
+            <Text style={{fontSize:6,fontWeight:"bold",color:"rgba(41,46,189,1)"}}>Museu Histórico</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "centroEstudosAmbientais1", latitude: -21.348380, longitude:-46.530373},
+            {name: "centroEstudosAmbientais2", latitude: -21.348261, longitude:-46.530499},
+            {name: "centroEstudosAmbientais3", latitude: -21.348161, longitude:-46.530375},
+            {name: "centroEstudosAmbientais4", latitude: -21.348257, longitude:-46.530235},
+          ]} strokeWidth={2} strokeColor="rgba(31,246,109,1)" fillColor="rgba(31,246,109,0.3)" onPress={() => {setNomeSetorSelecionado("CEAM");setCoordenadasMarcador({latitude: -21.348260, longitude: -46.530382})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348260, longitude: -46.530382}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(31,246,109,1)"}}>CEAM</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "espacoEcumenico1", latitude: -21.348632, longitude:-46.529820},
+            {name: "espacoEcumenico2", latitude: -21.348572, longitude:-46.529769},
+            {name: "espacoEcumenico3", latitude: -21.348542, longitude:-46.529805},
+            {name: "espacoEcumenico4", latitude: -21.348602, longitude:-46.529851},
+          ]} strokeWidth={2} strokeColor="rgba(31,246,109,1)" fillColor="rgba(31,246,109,0.3)" onPress={() => {setNomeSetorSelecionado("Espaço Ecumênico");setCoordenadasMarcador({latitude: -21.348593, longitude: -46.529811})}} tappable={true} 
+          />
+          <Polygon coordinates={[
+            {name: "horta1", latitude: -21.348164, longitude:-46.530583},
+            {name: "horta2", latitude: -21.348062, longitude:-46.530475},
+            {name: "horta3", latitude: -21.347962, longitude:-46.530613},
+            {name: "horta4", latitude: -21.348051, longitude:-46.530701},
+          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>CEAM</Text>
           </Marker>
           
           
           
           
           
-          
+        
 
 
 

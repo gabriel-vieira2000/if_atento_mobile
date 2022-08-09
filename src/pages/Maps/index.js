@@ -488,8 +488,60 @@ const Maps = ({route}) => {
           ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
           />
           <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>CEAM</Text>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>Horta</Text>
           </Marker>
+          <Polygon coordinates={[
+            {name: "prefeituraEstacionamento1", latitude: -21.349180, longitude:-46.531074},
+            {name: "prefeituraEstacionamento2", latitude: -21.348620, longitude:-46.530232},
+            {name: "prefeituraEstacionamento3", latitude: -21.348895, longitude:-46.529899},
+            {name: "prefeituraEstacionamento4", latitude: -21.349814, longitude:-46.530473},
+          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>Prefeitura e Estacionamento</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "canil1", latitude: -21.348833, longitude:-46.530478},
+            {name: "canil2", latitude: -21.348783, longitude:-46.530864},
+            {name: "canil3", latitude: -21.348633, longitude:-46.530834},
+            {name: "canil4", latitude: -21.348710, longitude:-46.530456},
+          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Canil");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Canil</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "almoxarifado1", latitude: -21.348616, longitude:-46.530271},
+            {name: "almoxarifado2", latitude: -21.348531, longitude:-46.530376},
+            {name: "almoxarifado3", latitude: -21.348481, longitude:-46.530317},
+            {name: "almoxarifado4", latitude: -21.348566, longitude:-46.530218},
+          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Almoxarifado");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Almoxarifado</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "lavanderia1", latitude: -21.348546, longitude:-46.530471},
+            {name: "lavanderia2", latitude: -21.348392, longitude:-46.530652},
+            {name: "lavanderia3", latitude: -21.348275, longitude:-46.530546},
+            {name: "lavanderia4", latitude: -21.348434, longitude:-46.530370},
+          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Lavanderia");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Lavanderia</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "abatedouroFabricaRacao1", latitude: -21.348256, longitude:-46.530981},
+            {name: "abatedouroFabricaRacao2", latitude: -21.348451, longitude:-46.530652},
+            {name: "abatedouroFabricaRacao3", latitude: -21.348266, longitude:-46.530585},
+            {name: "abatedouroFabricaRacao4", latitude: -21.348073, longitude:-46.530814},
+          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Abatedouro e Fábrica de Ração");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Abatedouro e Fábrica de Ração</Text>
+          </Marker>
+          
+          
           
           
           

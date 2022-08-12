@@ -495,40 +495,40 @@ const Maps = ({route}) => {
             {name: "prefeituraEstacionamento2", latitude: -21.348620, longitude:-46.530232},
             {name: "prefeituraEstacionamento3", latitude: -21.348895, longitude:-46.529899},
             {name: "prefeituraEstacionamento4", latitude: -21.349814, longitude:-46.530473},
-          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(101,201,89,1)" fillColor="rgba(101,201,89,0.3)" onPress={() => {setNomeSetorSelecionado("Prefeitura e Estacionamento");setCoordenadasMarcador({latitude: -21.349036, longitude: -46.530171})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>Prefeitura e Estacionamento</Text>
+          <Marker coordinate={{latitude: -21.349036, longitude: -46.530171}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(101,201,89,1)"}}>Prefeitura e Estacionamento</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "canil1", latitude: -21.348833, longitude:-46.530478},
             {name: "canil2", latitude: -21.348783, longitude:-46.530864},
             {name: "canil3", latitude: -21.348633, longitude:-46.530834},
             {name: "canil4", latitude: -21.348710, longitude:-46.530456},
-          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Canil");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(230,164,35,1)" fillColor="rgba(230,164,35,0.3)" onPress={() => {setNomeSetorSelecionado("Canil");setCoordenadasMarcador({latitude: -21.348760, longitude: -46.530627})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Canil</Text>
+          <Marker coordinate={{latitude: -21.348760, longitude: -46.530627}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(230,164,35,1)"}}>Canil</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "almoxarifado1", latitude: -21.348616, longitude:-46.530271},
             {name: "almoxarifado2", latitude: -21.348531, longitude:-46.530376},
             {name: "almoxarifado3", latitude: -21.348481, longitude:-46.530317},
             {name: "almoxarifado4", latitude: -21.348566, longitude:-46.530218},
-          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Almoxarifado");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(110,164,65,1)" fillColor="rgba(110,164,65,0.3)" onPress={() => {setNomeSetorSelecionado("Almoxarifado");setCoordenadasMarcador({latitude: -21.348544, longitude: -46.530291})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Almoxarifado</Text>
+          <Marker coordinate={{latitude: -21.348544, longitude: -46.530291}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,164,65,1)"}}>Almoxarifado</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "lavanderia1", latitude: -21.348546, longitude:-46.530471},
             {name: "lavanderia2", latitude: -21.348392, longitude:-46.530652},
             {name: "lavanderia3", latitude: -21.348275, longitude:-46.530546},
             {name: "lavanderia4", latitude: -21.348434, longitude:-46.530370},
-          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Lavanderia");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(220,50,178,1)" fillColor="rgba(220,50,178,0.3)" onPress={() => {setNomeSetorSelecionado("Lavanderia");setCoordenadasMarcador({latitude:-21.348415, longitude: -46.530525})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Lavanderia</Text>
+          <Marker coordinate={{latitude:-21.348415, longitude: -46.530525}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(220,50,178,1)"}}>Lavanderia</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "abatedouroFabricaRacao1", latitude: -21.348256, longitude:-46.530981},
@@ -540,6 +540,43 @@ const Maps = ({route}) => {
           <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} tracksViewChanges={false}>
             <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Abatedouro e Fábrica de Ração</Text>
           </Marker>
+          <Polygon coordinates={[
+            {name: "proeja1", latitude: -21.347928, longitude:-46.530872},
+            {name: "proeja2", latitude: -21.347751, longitude:-46.531266},
+            {name: "proeja3", latitude: -21.347636, longitude:-46.531199},
+            {name: "proeja4", latitude: -21.347815, longitude:-46.530802},
+          ]} strokeWidth={2} strokeColor="rgba(118,214,85,1)" fillColor="rgba(118,214,85,0.3)" onPress={() => {setNomeSetorSelecionado("PROEJA");setCoordenadasMarcador({latitude: -21.347781, longitude: -46.531045})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.347781, longitude: -46.531045}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(118,214,85,1)"}}>PROEJA</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "predioEdificacoes1", latitude: -21.348373, longitude:-46.531155},
+            {name: "predioEdificacoes2", latitude: -21.348288, longitude:-46.531297},
+            {name: "predioEdificacoes3", latitude: -21.347948, longitude:-46.531125},
+            {name: "predioEdificacoes4", latitude: -21.348020, longitude:-46.530965},
+          ]} strokeWidth={2} strokeColor="rgba(58,164,195,1)" fillColor="rgba(58,164,195,0.3)" onPress={() => {setNomeSetorSelecionado("Prédio de Edificações");setCoordenadasMarcador({latitude: -21.348166, longitude: -46.531130})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348166, longitude: -46.531130}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(58,164,195,1)"}}>Prédio de Edificações</Text>
+          </Marker>
+          <Polygon coordinates={[
+            {name: "hospVet1", latitude: -21.347677, longitude:-46.531622},
+            {name: "hospVet2", latitude: -21.347914, longitude:-46.531145},
+            {name: "hospVet3", latitude: -21.348306, longitude:-46.531319},
+            {name: "hospVet4", latitude: -21.348396, longitude:-46.531154},
+            {name: "hospVet5", latitude: -21.348713, longitude:-46.531323},
+            {name: "hospVet6", latitude: -21.348199, longitude:-46.532559},
+            {name: "hospVet7", latitude: -21.347894, longitude:-46.532382},
+            {name: "hospVet8", latitude: -21.347677, longitude:-46.531622},
+          ]} strokeWidth={2} strokeColor="rgba(140,164,175,1)" fillColor="rgba(140,164,175,0.3)" onPress={() => {setNomeSetorSelecionado("Hospital Veterinário");setCoordenadasMarcador({latitude: -21.348241, longitude: -46.531639})}} tappable={true} 
+          />
+          <Marker coordinate={{latitude: -21.348241, longitude: -46.531639}} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(140,164,175,1)"}}>Hospital Veterinário</Text>
+          </Marker>
+          
+          
+          
           
           
           

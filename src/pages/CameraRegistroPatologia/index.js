@@ -1,14 +1,16 @@
 import { Button, Divider, TopNavigation, Layout, BottomNavigation , BottomNavigationTab, Icon } from "@ui-kitten/components";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
-import { NavigationHelpersContext, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const CameraRegistroPatologia = () => {
     const navegacao = useNavigation();
     const [tipoCamera, setTipoCamera] = useState(Camera.Constants.Type.back);
     const [temPermissaoCamera, setTemPermissaoCamera] = useState(null);
+    const [uriFoto, setUriFoto] = useState("");
+    const camRef = useRef(null);
     
     useEffect(() => {
         (async () => {
@@ -19,6 +21,16 @@ const CameraRegistroPatologia = () => {
             }
         })();
     }, []);
+
+    async function takePicture(){
+        if(camRef){
+            const dadosFoto = await camRef.current.takePictureAsync();
+            setUriFoto(dadosFoto);
+            console.log(uriFoto);
+            //navegacao.state.params.uriFoto(dadosFoto.uri);
+            navegacao.goBack();
+        }
+    }
 
     return (
         <SafeAreaView style={{flex:1}}>
@@ -35,9 +47,11 @@ const CameraRegistroPatologia = () => {
                         </TouchableOpacity>
                     </View>
                 </Camera>
-                <Button onPress={() => {
+                <Button style={{paddingBottom:10}} onPress={() => {
                             setTipoCamera(tipoCamera === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
-                            navegacao.goBack();
+                }}> Trocar Camera</Button>
+                <Button style={{paddingTop:10}} onPress={() => {
+                            takePicture()
                 }}> Tirar Foto</Button>
             </Layout>
         </SafeAreaView>

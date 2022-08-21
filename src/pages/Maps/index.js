@@ -85,7 +85,7 @@ const Maps = ({route}) => {
   return (
     <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
-      <MapView style={styles.map} mapType="hybrid" minZoomLevel={19} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={false} toolbarEnabled={false}
+      <MapView style={styles.map} mapType="hybrid" minZoomLevel={17} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={true} toolbarEnabled={false}
         initialRegion={{
           latitude: -21.350384,
           longitude: -46.527697,
@@ -218,9 +218,9 @@ const Maps = ({route}) => {
             {name: "cead2", latitude: -21.351054, longitude: -46.526401},
             {name: "cead3", latitude: -21.350753, longitude: -46.526312},
             {name: "cead4", latitude: -21.350805, longitude: -46.526134},
-          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350924, longitude: -46.526269})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("CEAD");setCoordenadasMarcador({latitude:-21.350924, longitude: -46.526269})}} tappable={true} 
           />
-          <Marker coordinate={{latitude:-21.350924, longitude: -46.526269}} onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350924, longitude: -46.526269})}} tappable={true} tracksViewChanges={false}>
+          <Marker coordinate={{latitude:-21.350924, longitude: -46.526269}} onPress={() => {setNomeSetorSelecionado("CEAD");setCoordenadasMarcador({latitude:-21.350924, longitude: -46.526269})}} tappable={true} tracksViewChanges={false}>
             <Text style={{fontSize:12,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>CEAD</Text>
           </Marker>
           <Polygon coordinates={[
@@ -238,9 +238,9 @@ const Maps = ({route}) => {
             {name: "deposito2", latitude: -21.351001, longitude: -46.526692},
             {name: "deposito3", latitude: -21.350701, longitude: -46.526595},
             {name: "deposito4", latitude: -21.350627, longitude: -46.526826},
-          ]} strokeWidth={2} strokeColor="rgba(98,204,225,1)" fillColor="rgba(98,204,225,0.3)" onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350772, longitude: -46.526763});navegaParaSobre()}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(98,204,225,1)" fillColor="rgba(98,204,225,0.3)" onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350772, longitude: -46.526763})}} tappable={true} 
           />
-          <Marker coordinate={{latitude:-21.350772, longitude: -46.526763}} onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350772, longitude: -46.526763});navegaParaSobre()}} tappable={true} tracksViewChanges={false}>
+          <Marker coordinate={{latitude:-21.350772, longitude: -46.526763}} onPress={() => {setNomeSetorSelecionado("Depósito");setCoordenadasMarcador({latitude:-21.350772, longitude: -46.526763})}} tappable={true} tracksViewChanges={false}>
             <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(98,204,225,1)"}}>Depósito</Text>
           </Marker>
           <Polygon coordinates={[
@@ -328,9 +328,9 @@ const Maps = ({route}) => {
             {name: "jardinagemPaisagismo2", latitude: -21.349474, longitude: -46.527859},
             {name: "jardinagemPaisagismo3", latitude: -21.349702, longitude: -46.527836},
             {name: "jardinagemPaisagismo4", latitude: -21.349719, longitude: -46.527970},
-          ]} strokeWidth={2} strokeColor="rgba(199,119,144,1)" fillColor="rgba(199,119,144,0.3)" onPress={() => {setNomeSetorSelecionado("Não Sei");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(199,119,144,1)" fillColor="rgba(199,119,144,0.3)" onPress={() => {setNomeSetorSelecionado("Jardim e Paisagismo");setCoordenadasMarcador({latitude:-21.349599, longitude: -46.527905})}} tappable={true} 
           />
-          <Marker coordinate={{latitude:-21.349599, longitude: -46.527905}} onPress={() => {setNomeSetorSelecionado("Não Sei");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776})}} tappable={true} tracksViewChanges={false}>
+          <Marker coordinate={{latitude:-21.349599, longitude: -46.527905}} onPress={() => {setNomeSetorSelecionado("Jardim e Paisagismo");setCoordenadasMarcador({latitude:-21.350117, longitude:-46.527776})}} tappable={true} tracksViewChanges={false}>
             <Text style={{fontSize:8,fontWeight:"bold",color:"rgba(199,119,144,1)"}}>Jardinagem e Paisagismo</Text>
           </Marker>
           <Polygon coordinates={[
@@ -482,10 +482,10 @@ const Maps = ({route}) => {
             {name: "horta2", latitude: -21.348062, longitude:-46.530475},
             {name: "horta3", latitude: -21.347962, longitude:-46.530613},
             {name: "horta4", latitude: -21.348051, longitude:-46.530701},
-          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.3)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(202,164,125,1)" fillColor="rgba(202,164,125,0.2)" onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
           />
           <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} onPress={() => {setNomeSetorSelecionado("Horta");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>Horta</Text>
+            <Text style={{fontSize:14,fontWeight:"bold",color:"rgba(202,164,125,1)"}}>Horta</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "prefeituraEstacionamento1", latitude: -21.349180, longitude:-46.531074},
@@ -532,9 +532,9 @@ const Maps = ({route}) => {
             {name: "abatedouroFabricaRacao2", latitude: -21.348451, longitude:-46.530652},
             {name: "abatedouroFabricaRacao3", latitude: -21.348266, longitude:-46.530585},
             {name: "abatedouroFabricaRacao4", latitude: -21.348073, longitude:-46.530814},
-          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Abatedouro e Fábrica de Ração");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(110,64,135,1)" fillColor="rgba(110,64,135,0.3)" onPress={() => {setNomeSetorSelecionado("Abatedouro e Fábrica de Ração");setCoordenadasMarcador({latitude: -21.348230, longitude: -46.530779})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348066, longitude: -46.530602}} onPress={() => {setNomeSetorSelecionado("Abatedouro e Fábrica de Ração");setCoordenadasMarcador({latitude: -21.348066, longitude: -46.530602})}} tappable={true} tracksViewChanges={false}>
+          <Marker coordinate={{latitude: -21.348230, longitude: -46.530779}} onPress={() => {setNomeSetorSelecionado("Abatedouro e Fábrica de Ração");setCoordenadasMarcador({latitude: -21.348230, longitude: -46.530779})}} tappable={true} tracksViewChanges={false}>
             <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(110,64,135,1)"}}>Abatedouro e Fábrica de Ração</Text>
           </Marker>
           <Polygon coordinates={[
@@ -696,9 +696,9 @@ const Maps = ({route}) => {
             {name: "viveiroMuda2", latitude: -21.349588, longitude: -46.523934},
             {name: "viveiroMuda3", latitude: -21.349487, longitude: -46.523935},
             {name: "viveiroMuda4", latitude: -21.349481, longitude: -46.524095},
-          ]} strokeWidth={2} strokeColor="rgba(198,74,95,1)" fillColor="rgba(198,74,95,0.3)" onPress={() => {setNomeSetorSelecionado("Viveiro de Muda");setCoordenadasMarcador({latitude:-21.348876, longitude:-46.523163})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(198,74,95,1)" fillColor="rgba(198,74,95,0.3)" onPress={() => {setNomeSetorSelecionado("Viveiro de Muda");setCoordenadasMarcador({latitude:-21.349533, longitude:-46.524023})}} tappable={true} 
           />
-          <Marker coordinate={{latitude:-21.349531, longitude:-46.524021}} onPress={() => {setNomeSetorSelecionado("Viveiro de Muda");setCoordenadasMarcador({latitude:-21.348876, longitude:-46.523163})}} tappable={true} tracksViewChanges={false}>
+          <Marker coordinate={{latitude:-21.349533, longitude:-46.524023}} onPress={() => {setNomeSetorSelecionado("Viveiro de Muda");setCoordenadasMarcador({latitude:-21.349533, longitude:-46.524023})}} tappable={true} tracksViewChanges={false}>
             <Text style={{fontSize:8,fontWeight:"bold",color:"rgba(198,74,95,1)"}} >Viveiro de Muda</Text>
           </Marker>
           <Polygon coordinates={[
@@ -716,10 +716,10 @@ const Maps = ({route}) => {
             {name: "CECAES2", latitude: -21.355723, longitude: -46.518102},
             {name: "CECAES3", latitude: -21.355347, longitude: -46.518789},
             {name: "CECAES4", latitude: -21.356448, longitude: -46.519525},
-          ]} strokeWidth={2} strokeColor="rgba(255,255,255,1)" fillColor="rgba(255,255,255,0.3)" onPress={() => {setNomeSetorSelecionado("CECAES");setCoordenadasMarcador({latitude:-21.348956, longitude:-46.523222})}} tappable={true} 
+          ]} strokeWidth={2} strokeColor="rgba(255,255,255,1)" fillColor="rgba(255,255,255,0.3)" onPress={() => {setNomeSetorSelecionado("CECAES");setCoordenadasMarcador({latitude:-21.356185, longitude:-46.518963})}} tappable={true} 
           />
-          <Marker coordinate={{latitude:-21.348956, longitude:-46.523222}} onPress={() => {setNomeSetorSelecionado("CECAES");setCoordenadasMarcador({latitude:-21.348956, longitude:-46.523222})}} tappable={true} tracksViewChanges={false}>
-            <Text style={{fontSize:20,fontWeight:"bold",color:"rgba(255,255,255,1)"}}>CECAES</Text>
+          <Marker coordinate={{latitude:-21.356185, longitude:-46.518963}} onPress={() => {setNomeSetorSelecionado("CECAES");setCoordenadasMarcador({latitude:-21.356185, longitude:-46.518963})}} tappable={true} tracksViewChanges={false}>
+            <Text style={{fontSize:12,fontWeight:"bold",color:"rgba(255,255,255,1)"}}>CECAES</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "estacionamento1", latitude: -21.349971, longitude: -46.527160},

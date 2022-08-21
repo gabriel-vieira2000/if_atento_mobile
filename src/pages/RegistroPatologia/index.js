@@ -52,8 +52,9 @@ const RegistroPatologia = ({route}) => {
         if(camRef){
             console.log("Pegou a referencia");
             const dadosFoto = await camRef.current.takePictureAsync();
-            setUriFoto(dadosFoto);
+            setUriFoto(dadosFoto.uri);
             console.log(dadosFoto);
+            console.log(dadosFoto.uri);
             console.log(uriFoto);
             //navegacao.state.params.uriFoto(dadosFoto.uri);
             navegacao.goBack();
@@ -116,13 +117,15 @@ const RegistroPatologia = ({route}) => {
                                 <Button onPress={() => {
                                             setTipoCamera(tipoCamera === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
                                 }}> Trocar Camera</Button>
-                                <Button onPress={() => {
-                                            takePicture();
+                                <Button onPress={async () => {
+                                            await takePicture();
                                             setModalFotoVisivel(false);
                                 }}> Tirar Foto</Button>
                                 </View>
                             </Layout>
                         </Modal>
+
+                        <Text>{uriFoto}</Text>
                     </View>
 
 

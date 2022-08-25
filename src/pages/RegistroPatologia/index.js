@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { Layout, TopNavigation, Button, Select, IndexPath, SelectItem, Radio, RadioGroup, Input } from "@ui-kitten/components";
 import React, {useState, useEffect, useRef} from "react";
-import { View, Text, StyleSheet, Modal, Dimensions } from "react-native";
-import { Camera } from "expo-camera";
+import { View, Text, StyleSheet, Modal, Dimensions, Platform, Image } from "react-native";
+//import { Camera } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -26,19 +27,29 @@ const RegistroPatologia = ({route}) => {
     const [patologia, setPatologia] = useState([]);
 
 
-    const [uriFoto, setUriFoto] = useState("");
+    /*const [uriFoto, setUriFoto] = useState("");
     const [modalFotoVisivel, setModalFotoVisivel] = useState(false);
     const [tipoCamera, setTipoCamera] = useState(Camera.Constants.Type.back);
     const [temPermissaoCamera, setTemPermissaoCamera] = useState(null);
-    const camRef = useRef(null);
+    const camRef = useRef(null);*/
+
+    const [foto, setFoto] = useState(null);
+    const [nomeFoto, setNomeFoto] = useState("");
+    const [tipoFoto, setTipoFoto] = useState("");
 
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
+            /*const { status } = await Camera.requestCameraPermissionsAsync();
             setTemPermissaoCamera(status === 'granted');
             if(status !== 'granted'){
                 navegacao.goBack();
+            }*/
+            if(Platform.OS !== 'web'){
+                const { status } = await ImagePicker.requestCameraPermissionsAsync();
+                if( status !== 'granted'){
+                    alert("Permissão de Acesso aos arquivos negada! Confira as suas configurações no celular");
+                }
             }
         })();
         api.get('/patologias').then(respostaAPI => {
@@ -46,7 +57,7 @@ const RegistroPatologia = ({route}) => {
         });
     }, []);
 
-    async function takePicture(){
+    /*async function takePicture(){
         console.log("Entrou na função");
         console.log(uriFoto);
         if(camRef){
@@ -58,6 +69,21 @@ const RegistroPatologia = ({route}) => {
             console.log(uriFoto);
             //navegacao.state.params.uriFoto(dadosFoto.uri);
             navegacao.goBack();
+        }
+    }*/
+
+    async function selecionaFoto(){
+        let resultado = await ImagePicker.launchCameraAsync({
+            //mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+        console.log(resultado);
+        if (!resultado.cancelled){
+            setFoto(resultado.uri);
+            setNomeFoto(resultado.uri.split('/').pop());
+            setTipoFoto(resultado.type);
         }
     }
 
@@ -106,26 +132,11 @@ const RegistroPatologia = ({route}) => {
 
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Por gentileza nos envie uma foto da patologia abaixo:</Text>
-                        <Button appearance="filled" onPress={() => {setModalFotoVisivel(true);}}>ABRIR CÂMERA</Button>
+                        <Button appearance="filled" onPress={() => {/*setModalFotoVisivel(true);*/selecionaFoto()}}>ABRIR CÂMERA</Button>
                         
-                        <Modal animationType="slide" transparent={false} visible={modalFotoVisivel}>
-                            <Layout style={styles.container}>
-                            <Text>Posicione a câmera para captar a patologia e pressione em Tirar Foto:</Text>
-                                <Camera style={styles.camera} type={tipoCamera} ref={camRef}>
-                                </Camera>
-                                <View style={styles.containerRadio}>
-                                <Button onPress={() => {
-                                            setTipoCamera(tipoCamera === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
-                                }}> Trocar Camera</Button>
-                                <Button onPress={async () => {
-                                            await takePicture();
-                                            setModalFotoVisivel(false);
-                                }}> Tirar Foto</Button>
-                                </View>
-                            </Layout>
-                        </Modal>
-
-                        <Text>{uriFoto}</Text>
+                        
+                            
+                        {foto && <Image source={{uri:foto}} style={{width:200,height:200}}/>}
                     </View>
 
 
@@ -142,23 +153,35 @@ const RegistroPatologia = ({route}) => {
                             const gTipoPatologia = tipoPatologia.row;
                             const gTempoPatologia = tempoPatologia.row;
                             const gUrgencia = urgencia;
-                            console.log(`${gTipoPatologia} - ${gTempoPatologia} - ${gUrgencia} - ${textoDetalhes}`);
-                                
-                            await api.post("/patologias", {
-                                nomeSetor: nomeSetor,
-                                tipoPatologia: gTipoPatologia,
-                                tempoPatologia: gTempoPatologia,
-                                urgencia: gUrgencia,
-                                detalhes: textoDetalhes
-                            }).then(response => console.log(response))
-                            .catch(error => {
-                                if (error.response) {
+                            
+                            const dados = new FormData();
+                            dados.append("nomeSetor", nomeSetor);
+                            dados.append("tipoPatologia", gTipoPatologia);
+                            dados.append("tempoPatologia", gTempoPatologia);
+                            dados.append("urgencia", gUrgencia);
+                            dados.append("detalhes", textoDetalhes);
+                            dados.append("fotoPatologia", {
+                                uri: foto,
+                                nome: nomeFoto,
+                                tipo: tipoFoto
+                            });
+
+                            console.log(dados);
+
+                            await api.post("/patologias",dados, {headers:{'content-type':'multipart/form-data'}})
+                            .then(response => {
+                                console.log("Enviado com sucesso!");
+                                console.log(response);
+                                navegacao.navigate("SavedRegistry");
+                            })
+                            .catch(error =>{
+                                if (error.response){
+                                    console.log("ERRO!!!");
                                     console.log(error.response.data);
                                     console.log(error.response.status);
                                     console.log(error.response.headers);
                                 }
                             });
-                            navegacao.navigate("SavedRegistry");
                         }}>SALVAR REGISTRO</Button>
                     </View>
                     <Text style={styles.textoRodape}>O registro das patologias é feito de forma totalmente anônima!</Text>          

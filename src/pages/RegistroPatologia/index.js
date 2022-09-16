@@ -2,10 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import { Layout, TopNavigation, Button, Select, IndexPath, SelectItem, Radio, RadioGroup, Input } from "@ui-kitten/components";
 import React, {useState, useEffect, useRef} from "react";
 import { View, Text, StyleSheet, Modal, Dimensions, Platform, Image } from "react-native";
-//import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { RNS3 } from "react-native-aws3";
 
 import api from "../../services/api";
 
@@ -27,12 +27,6 @@ const RegistroPatologia = ({route}) => {
     const [patologia, setPatologia] = useState([]);
 
 
-    /*const [uriFoto, setUriFoto] = useState("");
-    const [modalFotoVisivel, setModalFotoVisivel] = useState(false);
-    const [tipoCamera, setTipoCamera] = useState(Camera.Constants.Type.back);
-    const [temPermissaoCamera, setTemPermissaoCamera] = useState(null);
-    const camRef = useRef(null);*/
-
     const [foto, setFoto] = useState(null);
     const [nomeFoto, setNomeFoto] = useState("");
     const [tipoFoto, setTipoFoto] = useState("");
@@ -40,11 +34,7 @@ const RegistroPatologia = ({route}) => {
 
     useEffect(() => {
         (async () => {
-            /*const { status } = await Camera.requestCameraPermissionsAsync();
-            setTemPermissaoCamera(status === 'granted');
-            if(status !== 'granted'){
-                navegacao.goBack();
-            }*/
+
             if(Platform.OS !== 'web'){
                 const { status } = await ImagePicker.requestCameraPermissionsAsync();
                 if( status !== 'granted'){
@@ -57,26 +47,11 @@ const RegistroPatologia = ({route}) => {
         });
     }, []);
 
-    /*async function takePicture(){
-        console.log("Entrou na função");
-        console.log(uriFoto);
-        if(camRef){
-            console.log("Pegou a referencia");
-            const dadosFoto = await camRef.current.takePictureAsync();
-            setUriFoto(dadosFoto.uri);
-            console.log(dadosFoto);
-            console.log(dadosFoto.uri);
-            console.log(uriFoto);
-            //navegacao.state.params.uriFoto(dadosFoto.uri);
-            navegacao.goBack();
-        }
-    }*/
-
     async function selecionaFoto(){
         let resultado = await ImagePicker.launchCameraAsync({
             //mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
+            //allowsEditing: true,
+            //aspect: [4, 3],
             quality: 1
         });
         console.log(resultado);
@@ -85,6 +60,31 @@ const RegistroPatologia = ({route}) => {
             setNomeFoto(resultado.uri.split('/').pop());
             setTipoFoto(resultado.type);
         }
+
+        /*const arquivoFoto = {
+            uri: foto,
+            name: nomeFoto,
+            type: 'image/png'
+        }
+
+        console.log(arquivoFoto);
+
+        const config = {
+            bucket:'cyclic-dark-pink-puffer-hat-sa-east-1',
+            region:'sa-east-1',
+            accessKey: 'ASIA2SMQIUZT5W6ZUTB5',
+            secretKey: 'cHWNGTS3GwSeudRLnF22Eso5IQazG3HiV8WJkkEH',
+            successActionStatus: 201
+        }
+
+        console.log(config);
+
+        await RNS3.put(arquivoFoto,config)
+        .then((response) => {
+            console.log("Entrou AQUI!!!!");
+            console.log(response);
+            console.log(response.body.postResponse.location);
+        }).catch((error) => {console.log("Deu Erro!"); console.log(error);});*/
     }
 
     return (
@@ -100,11 +100,11 @@ const RegistroPatologia = ({route}) => {
 
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Selecione o tipo de patologia encontrada:</Text>
-                        <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);}}>
+                        {/* <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);}}>
                             {patologia.map(patologia => (
                             <SelectItem key={patologia.idPatologia} title={patologia.nomePatologia}/> 
                             ))}
-                        </Select>
+                        </Select> */}
                         <Text style={styles.textoRodape}>Você deve selecionar uma opção dentre as apresentadas que se enquadra com o que você está vendo!</Text>
                     </View>
 
@@ -132,11 +132,8 @@ const RegistroPatologia = ({route}) => {
 
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Por gentileza nos envie uma foto da patologia abaixo:</Text>
-                        <Button appearance="filled" onPress={() => {/*setModalFotoVisivel(true);*/selecionaFoto()}}>ABRIR CÂMERA</Button>
-                        
-                        
-                            
-                        {foto && <Image source={{uri:foto}} style={{width:200,height:200}}/>}
+                        {foto && <Image source={{uri:foto}} style={{width:200,height:200,alignSelf:"center"}}/>}
+                        {foto ? <Button appearance="filled" onPress={() => {selecionaFoto()}}>ALTERAR FOTO</Button>  : <Button appearance="filled" onPress={() => {selecionaFoto()}}>ABRIR CÂMERA</Button> } 
                     </View>
 
 
@@ -153,22 +150,43 @@ const RegistroPatologia = ({route}) => {
                             const gTipoPatologia = tipoPatologia.row;
                             const gTempoPatologia = tempoPatologia.row;
                             const gUrgencia = urgencia;
+
+                            console.log(`${foto} - ${nomeFoto} - ${tipoFoto}`);
                             
                             const dados = new FormData();
                             dados.append("nomeSetor", nomeSetor);
-                            dados.append("tipoPatologia", gTipoPatologia);
+                            //dados.append("tipoPatologia", gTipoPatologia);
                             dados.append("tempoPatologia", gTempoPatologia);
                             dados.append("urgencia", gUrgencia);
                             dados.append("detalhes", textoDetalhes);
-                            dados.append("fotoPatologia", {
+                            /*dados.append("fotoPatologia", {
                                 uri: foto,
                                 nome: nomeFoto,
-                                tipo: tipoFoto
-                            });
+                                tipo: "image/jpg"
+                            });*/
 
                             console.log(dados);
 
-                            await api.post("/patologias",dados, {headers:{'content-type':'multipart/form-data'}})
+                            await api.post("/ocorrencias", {
+                                "nomeSetor":nomeSetor,
+                                "tempoPatologia":gTempoPatologia,
+                                "urgencia":gUrgencia,
+                                "textoDetalhes":textoDetalhes
+                            })
+                            .then((response) => {
+                                console.log("Enviado para o Back-end");
+                                console.log(response);
+                                navegacao.navigate("SavedRegistry");
+                            })
+                            .catch((error) => {
+                                console.log("Erro ao enviar para o back-end");
+                                console.log(error);
+                            });
+
+                            /*await api.post("/", dados, {headers: {
+                                'Content-Type' : 'multipart/form-data',
+                                Accept: 'application/json'
+                            }})
                             .then(response => {
                                 console.log("Enviado com sucesso!");
                                 console.log(response);
@@ -181,8 +199,34 @@ const RegistroPatologia = ({route}) => {
                                     console.log(error.response.status);
                                     console.log(error.response.headers);
                                 }
-                            });
+                            });*/
                         }}>SALVAR REGISTRO</Button>
+                        <Button onclick={() => {
+                            const arquivoFoto = {
+                                uri: foto,
+                                name: nomeFoto,
+                                type: 'image/png'
+                            }
+
+                            console.log(arquivoFoto);
+                    
+                            const config = {
+                                bucket:'cyclic-dark-pink-puffer-hat-sa-east-1',
+                                region:'sa-east-1',
+                                accessKey: 'ASIA2SMQIUZT5W6ZUTB5',
+                                secretKey: 'cHWNGTS3GwSeudRLnF22Eso5IQazG3HiV8WJkkEH',
+                                successActionStatus: 201
+                            }
+                    
+                            console.log(config);
+                    
+                            RNS3.put(arquivoFoto,config)
+                            .then((response) => {
+                                console.log("Entrou AQUI!!!!");
+                                console.log(response);
+                                console.log(response.body.postResponse.location);
+                            }).catch((error) => {console.log("Deu Erro!"); console.log(error);});
+                        }}>ENVIAR FOTO</Button>
                     </View>
                     <Text style={styles.textoRodape}>O registro das patologias é feito de forma totalmente anônima!</Text>          
                 </Layout>

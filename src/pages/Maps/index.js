@@ -28,23 +28,6 @@ const Maps = ({route}) => {
   const [setores, setSetores] = useState([]);
   const [irSobre, setIrSobre] = useState(false);
 
-  {/*seEffect(() => {
-    const {setores} = route.params;
-    api.get('/setores').then(respostaAPI => {
-      //console.log(respostaAPI.data)
-      setSetores(respostaAPI.data);
-  });
-    setSetores(setores);
-    console.log(setores.idSetor);
-    console.log(setores.nomeSetor);
-    setores.latitudeCentro = Number(setores.latitudeCentro);
-    setores.longitudeCentro = Number(setores.longitudeCentro);
-    console.log(setores.latitudeCentro);
-    console.log(setores.longitudeCentro);
-    console.log(setores.extremidadesSetoresTransformada);
-    setLoading(false);
-  }, []);*/}
-
   useEffect(() => {
     setSelectedIndex(0);
   }, []);
@@ -93,19 +76,6 @@ const Maps = ({route}) => {
           longitudeDelta: 0.009,
         }}> 
           {coordenadasMarcador.latitude != null ? <Marker coordinate={coordenadasMarcador}/> : null}
-          {/*setores.map(setor => (
-            <Polygon coordinates={setor.extremidadesSetoresTransformada} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" onPress={() => {setNomeSetorSelecionado(setor.nomeSetor); setCoordenadasMarcador({latitude:setor.latitudeCentro,longitude:setor.longitudeCentro})}} tappable={true}/> 
-          ))}
-          <Polygon coordinates={setores.extremidadesSetoresTransformada} strokeWidth={2} strokeColor="#000" fillColor="rgba(0,0,0,0.3)" 
-          onPress={() => {
-            setNomeSetorSelecionadoSelecionado(setores.nomeSetor); 
-            setIdSetorSelecionado(setores.idSetor);
-            setCoordenadasMarcador({latitude:setores.latitudeCentro, longitude:setores.longitudeCentro});}} 
-          tappable={true}/>
-          <Marker coordinate={{latitude:setores.latitudeCentro, longitude:setores.longitudeCentro}}>
-            <Text style={{fontSize:11,fontWeight:"bold",color:"#000"}}>{setores.nomeSetor}</Text>
-          </Marker>
-          */}
           <Polygon coordinates={[
             {name: "guarita1", latitude: -21.353305, longitude:-46.520623},
             {name: "guarita2", latitude: -21.353435, longitude:-46.520459},
@@ -441,14 +411,14 @@ const Maps = ({route}) => {
             <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(241,46,89,1)"}}>PN 06</Text>
           </Marker>
           <Polygon coordinates={[
-            {name: "sae1", latitude: -21.348901, longitude:-46.529710},
-            {name: "sae2", latitude: -21.348798, longitude:-46.529830},
-            {name: "sae3", latitude: -21.348642, longitude:-46.529687},
-            {name: "sae4", latitude: -21.348746, longitude:-46.529544},
-          ]} strokeWidth={2} strokeColor="rgba(241,46,89,1)" fillColor="rgba(241,46,89,0.3)" onPress={() => {setNomeSetorSelecionado("Setor de Assistência ao Educando");setCoordenadasMarcador({latitude: -21.348773, longitude: -46.529700})}} tappable={true} 
+            {name: "sae1", latitude: -21.348561, longitude: -46.530109},
+            {name: "sae2", latitude: -21.348431, longitude: -46.530264},
+            {name: "sae3", latitude: -21.348308, longitude: -46.530146},
+            {name: "sae4", latitude: -21.348422, longitude: -46.529964},
+          ]} strokeWidth={2} strokeColor="rgba(103,46,89,1)" fillColor="rgba(103,46,89,0.3)" onPress={() => {setNomeSetorSelecionado("Setor de Assistência ao Educando");setCoordenadasMarcador({latitude: -21.348465, longitude: -46.530134})}} tappable={true} 
           />
-          <Marker coordinate={{latitude: -21.348773, longitude: -46.529700}} onPress={() => {setNomeSetorSelecionado("Setor de Assistência ao Educando");setCoordenadasMarcador({latitude: -21.348773, longitude: -46.529700})}} tappable={true} tracksViewChanges={false}>
-            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(241,46,89,1)"}}>Setor de Assistência ao Educando</Text>
+          <Marker coordinate={{latitude: -21.348465, longitude: -46.530134}} onPress={() => {setNomeSetorSelecionado("Setor de Assistência ao Educando");setCoordenadasMarcador({latitude: -21.348465, longitude: -46.530134})}} tappable={true} tracksViewChanges={false}>
+            <Text style={{fontSize:10,fontWeight:"bold",color:"rgba(103,46,89,1)"}}>SAE</Text>
           </Marker>
           <Polygon coordinates={[
             {name: "museu1", latitude: -21.348701, longitude:-46.529942},

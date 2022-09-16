@@ -7,18 +7,17 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-//import api from '../../services/api';
+import api from '../../services/api';
 
 const Home = () => {
   const navegacao = useNavigation();
-  //const [setores, setSetores] = useState([]);
-  {/*useEffect(() => {
+  const [teste, setTeste] = useState("");
+  {useEffect(() => {
     console.log("Entrou no Effect");
-    api.get('/setores').then(respostaAPI => {
-        //console.log(respostaAPI.data)
-        setSetores(respostaAPI.data);
+    api.get('/').then(respostaAPI => {
+      setTeste(respostaAPI.data);
     });
-  }, []);*/}
+  }, []);}
 
   function executaNavegacaoParaMapa() {
     navegacao.navigate("Map");
@@ -42,6 +41,7 @@ const Home = () => {
             ACESSAR
           </Button>
         </View>
+        <Text style={styles.textoRodape}>{teste}</Text>
         <Text style={styles.textoRodape}>Instituto Federal - Campus Muzambinho</Text>
       </View>
     </SafeAreaView>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:'https://5e93-131-72-13-2.sa.ngrok.io',
+    baseURL:'https://dark-pink-puffer-hat.cyclic.app',
 });
 
 export default api;

@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RNS3 } from "react-native-aws3";
+import { secretVar } from "../../secretVar";
 
 import api from "../../services/api";
 
@@ -42,16 +43,14 @@ const RegistroPatologia = ({route}) => {
                 }
             }
         })();
-        api.get('/patologias').then(respostaAPI => {
-            setPatologia(respostaAPI.data);
+
+        tiposPatologias.map((patologia) => {
+            setPatologia(patologia);
         });
     }, []);
 
     async function selecionaFoto(){
         let resultado = await ImagePicker.launchCameraAsync({
-            //mediaTypes: ImagePicker.MediaTypeOptions.All,
-            //allowsEditing: true,
-            //aspect: [4, 3],
             quality: 1
         });
         console.log(resultado);
@@ -60,31 +59,6 @@ const RegistroPatologia = ({route}) => {
             setNomeFoto(resultado.uri.split('/').pop());
             setTipoFoto(resultado.type);
         }
-
-        /*const arquivoFoto = {
-            uri: foto,
-            name: nomeFoto,
-            type: 'image/png'
-        }
-
-        console.log(arquivoFoto);
-
-        const config = {
-            bucket:'cyclic-dark-pink-puffer-hat-sa-east-1',
-            region:'sa-east-1',
-            accessKey: 'ASIA2SMQIUZT5W6ZUTB5',
-            secretKey: 'cHWNGTS3GwSeudRLnF22Eso5IQazG3HiV8WJkkEH',
-            successActionStatus: 201
-        }
-
-        console.log(config);
-
-        await RNS3.put(arquivoFoto,config)
-        .then((response) => {
-            console.log("Entrou AQUI!!!!");
-            console.log(response);
-            console.log(response.body.postResponse.location);
-        }).catch((error) => {console.log("Deu Erro!"); console.log(error);});*/
     }
 
     return (
@@ -100,11 +74,11 @@ const RegistroPatologia = ({route}) => {
 
                     <View style={styles.containerGrupo}>
                         <Text style={styles.textoTituloSetor}>Selecione o tipo de patologia encontrada:</Text>
-                        {/* <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);}}>
-                            {patologia.map(patologia => (
-                            <SelectItem key={patologia.idPatologia} title={patologia.nomePatologia}/> 
+                        <Select selectedIndex={tipoPatologia} value={tiposPatologias[tipoPatologia.row]} onSelect={selecao => {setTipoPatologia(selecao);console.log(`${tipoPatologia} - ${tiposPatologias[tipoPatologia.row]}`)}}>
+                            {tiposPatologias.map(patologia => (
+                                <SelectItem key={patologia} title={patologia}/> 
                             ))}
-                        </Select> */}
+                        </Select>
                         <Text style={styles.textoRodape}>Você deve selecionar uma opção dentre as apresentadas que se enquadra com o que você está vendo!</Text>
                     </View>
 
@@ -150,83 +124,67 @@ const RegistroPatologia = ({route}) => {
                             const gTipoPatologia = tipoPatologia.row;
                             const gTempoPatologia = tempoPatologia.row;
                             const gUrgencia = urgencia;
+                            let urlFotoS3 = "";
+
+                            console.log("Patologia: ",gTipoPatologia);
+                            console.log("Tempo: ",gTempoPatologia);
+                            console.log("Urgencia: ",urgencia);
 
                             console.log(`${foto} - ${nomeFoto} - ${tipoFoto}`);
+
+                            if(foto != null){
+                                const arquivoFoto = {
+                                    uri: foto,
+                                    name: nomeFoto,
+                                    type: 'image/png'
+                                }
+                                console.log(arquivoFoto);
+
+                                const config = {
+                                    bucket: secretVar.AWS_S3_BUCKET,
+                                    region:'us-east-1',
+                                    accessKey: secretVar.AWS_S3_KEY_ID,
+                                    secretKey: secretVar.AWS_S3_SECRET_KEY,
+                                    successActionStatus: 201
+                                }
+                                console.log(config);
+                                await RNS3.put(arquivoFoto,config)
+                                .then((response) => {
+                                    if(response.status !== 201){
+                                        console.log("Fez a conexão com o S3, mas não conseguiu enviar o arquivo");
+                                        console.log(response);
+                                    }else{
+                                        console.log(response);
+                                        console.log(response.body.postResponse.location);
+                                        urlFotoS3 = response.body.postResponse.location;
+                                        
+                                    }
+                                }).catch((error) => {console.log("Deu Erro!"); console.log(error); urlFotoS3 = "ERRO"});
+                            }
+
+                            /*if(foto != null){
+                                while(urlFotoS3 == "" || urlFotoS3 != "ERRO"){
+                                    console.log("Esperando o envio da foto para a nuvem");
+                                }
+                            }*/
                             
-                            const dados = new FormData();
-                            dados.append("nomeSetor", nomeSetor);
-                            //dados.append("tipoPatologia", gTipoPatologia);
-                            dados.append("tempoPatologia", gTempoPatologia);
-                            dados.append("urgencia", gUrgencia);
-                            dados.append("detalhes", textoDetalhes);
-                            /*dados.append("fotoPatologia", {
-                                uri: foto,
-                                nome: nomeFoto,
-                                tipo: "image/jpg"
-                            });*/
-
-                            console.log(dados);
-
                             await api.post("/ocorrencias", {
                                 "nomeSetor":nomeSetor,
                                 "tempoPatologia":gTempoPatologia,
                                 "urgencia":gUrgencia,
-                                "textoDetalhes":textoDetalhes
+                                "textoDetalhes":textoDetalhes,
+                                "foto":urlFotoS3 
                             })
                             .then((response) => {
                                 console.log("Enviado para o Back-end");
-                                console.log(response);
+                                console.log(response.statusText);
                                 navegacao.navigate("SavedRegistry");
                             })
                             .catch((error) => {
                                 console.log("Erro ao enviar para o back-end");
                                 console.log(error);
                             });
-
-                            /*await api.post("/", dados, {headers: {
-                                'Content-Type' : 'multipart/form-data',
-                                Accept: 'application/json'
-                            }})
-                            .then(response => {
-                                console.log("Enviado com sucesso!");
-                                console.log(response);
-                                navegacao.navigate("SavedRegistry");
-                            })
-                            .catch(error =>{
-                                if (error.response){
-                                    console.log("ERRO!!!");
-                                    console.log(error.response.data);
-                                    console.log(error.response.status);
-                                    console.log(error.response.headers);
-                                }
-                            });*/
                         }}>SALVAR REGISTRO</Button>
-                        <Button onclick={() => {
-                            const arquivoFoto = {
-                                uri: foto,
-                                name: nomeFoto,
-                                type: 'image/png'
-                            }
-
-                            console.log(arquivoFoto);
-                    
-                            const config = {
-                                bucket:'cyclic-dark-pink-puffer-hat-sa-east-1',
-                                region:'sa-east-1',
-                                accessKey: 'ASIA2SMQIUZT5W6ZUTB5',
-                                secretKey: 'cHWNGTS3GwSeudRLnF22Eso5IQazG3HiV8WJkkEH',
-                                successActionStatus: 201
-                            }
-                    
-                            console.log(config);
-                    
-                            RNS3.put(arquivoFoto,config)
-                            .then((response) => {
-                                console.log("Entrou AQUI!!!!");
-                                console.log(response);
-                                console.log(response.body.postResponse.location);
-                            }).catch((error) => {console.log("Deu Erro!"); console.log(error);});
-                        }}>ENVIAR FOTO</Button>
                     </View>
                     <Text style={styles.textoRodape}>O registro das patologias é feito de forma totalmente anônima!</Text>          
                 </Layout>

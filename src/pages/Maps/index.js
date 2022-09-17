@@ -6,8 +6,6 @@ import { Layout, BottomNavigation , BottomNavigationTab, Icon} from "@ui-kitten/
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import api from '../../services/api';
-
 const mapIcon = (props) => (
   <Icon {...props} name='map-outline'/>
 );

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { Layout, TopNavigation, Button, Select, IndexPath, SelectItem, Radio, RadioGroup, Input } from "@ui-kitten/components";
 import React, {useState, useEffect, useRef} from "react";
-import { View, Text, StyleSheet, Modal, Dimensions, Platform, Image } from "react-native";
+import { View, Text, StyleSheet, Modal, Dimensions, Platform, Image, ActivityIndicator } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -9,6 +9,7 @@ import { RNS3 } from "react-native-aws3";
 import { secretVar } from "../../secretVar";
 
 import api from "../../services/api";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const RegistroPatologia = ({route}) => {
     const navegacao = useNavigation();
@@ -31,6 +32,8 @@ const RegistroPatologia = ({route}) => {
     const [foto, setFoto] = useState(null);
     const [nomeFoto, setNomeFoto] = useState("");
     const [tipoFoto, setTipoFoto] = useState("");
+
+    const [modalVisivel, setModalVisivel] = useState(false);
 
 
     useEffect(() => {
@@ -121,14 +124,18 @@ const RegistroPatologia = ({route}) => {
                     <View style={styles.containerGrupoCentralizado}>
                         <Text style={styles.textoBotao}>Após preencher todas as informações acima, por favor clique no botão abaixo!</Text>
                         <Button appearance="filled" onPress={async () => {
+                            setModalVisivel(true);
                             const gTipoPatologia = tipoPatologia.row;
                             const gTempoPatologia = tempoPatologia.row;
                             const gUrgencia = urgencia;
+                            let hoje = new Date();
+                            let dataRegistro = hoje.getDate()+"/"+hoje.getMonth()+"/"+hoje.getFullYear();
                             let urlFotoS3 = "";
 
                             console.log("Patologia: ",gTipoPatologia);
                             console.log("Tempo: ",gTempoPatologia);
                             console.log("Urgencia: ",urgencia);
+                            console.log("Data do Registro: ",dataRegistro);
 
                             console.log(`${foto} - ${nomeFoto} - ${tipoFoto}`);
 
@@ -170,29 +177,70 @@ const RegistroPatologia = ({route}) => {
                             
                             await api.post("/ocorrencias", {
                                 "nomeSetor":nomeSetor,
+                                "patologia":gTipoPatologia,
                                 "tempoPatologia":gTempoPatologia,
                                 "urgencia":gUrgencia,
                                 "textoDetalhes":textoDetalhes,
+                                "dataRegistro":dataRegistro,
                                 "foto":urlFotoS3 
                             })
                             .then((response) => {
                                 console.log("Enviado para o Back-end");
                                 console.log(response.statusText);
+                                setModalVisivel(false);
                                 navegacao.navigate("SavedRegistry");
                             })
                             .catch((error) => {
                                 console.log("Erro ao enviar para o back-end");
+                                setModalVisivel(false);
                                 console.log(error);
                             });
                         }}>SALVAR REGISTRO</Button>
                     </View>
                     <Text style={styles.textoRodape}>O registro das patologias é feito de forma totalmente anônima!</Text>          
+                    
+                    <Modal transparent={true} animationType="fade" style={styles.modal} visible={modalVisivel}>
+                        <View style={{backgroundColor:"rgba(0,0,0,0.4)",height:Dimensions.get("window").height}}>
+                            <TouchableOpacity style={styles.containerMensagem}>
+                                <Text style={styles.textoModal}>Estamos registrando os dados informados em nosso banco de dados, por favor aguarde!</Text>
+                                <ActivityIndicator size="large" color="#247106" />
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
                 </Layout>
             </KeyboardAwareScrollView>
         </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
+    containerModal: {
+        flex:1,
+        backgroundColor:"rgba(0,0,0,0.4)",
+        height:Dimensions.get("window").height,
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+    },
+
+    containerMensagem: {
+        top:"50%",
+        alignSelf:"center",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:"#F0FED2",
+        borderRadius:10,
+        padding:"5%",
+    },
+
+    textoModal: {
+        color: '#247106',
+        fontSize: 15,
+        fontWeight:"bold",
+        textAlign:"center",
+        paddingBottom:"5%",
+    },
+
     barraTopo:{
         backgroundColor:"#C4F979",
         fontWeight:"bold",

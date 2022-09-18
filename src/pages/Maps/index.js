@@ -66,7 +66,7 @@ const Maps = ({route}) => {
   return (
     <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
-      <MapView style={styles.map} mapType="hybrid" minZoomLevel={17} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={true} toolbarEnabled={false}
+      <MapView style={styles.map} mapType="hybrid" minZoomLevel={18} maxZoomLevel={20} zoomTapEnabled={false} zoomControlEnabled={true} toolbarEnabled={false}
         initialRegion={{
           latitude: -21.350384,
           longitude: -46.527697,
@@ -704,7 +704,7 @@ const Maps = ({route}) => {
       <SetorSelecionado nomeSetor={nomeSetorSelecionado}></SetorSelecionado>
 
       <Layout style={styles.footer} level="1">
-        <BottomNavigation style={styles.menuInferior} selectedIndex={selectedIndex} onSelect={index => {setSelectedIndex(index);if(index == 1){navegaParaSobre();}}}>
+        <BottomNavigation style={styles.menuInferior} selectedIndex={0} onSelect={index => {setSelectedIndex(index);if(index == 1){navegaParaSobre();}}}>
           <BottomNavigationTab style={styles.menuInferior} title='MAPA' icon={mapIcon}/>
           <BottomNavigationTab style={styles.menuInferior} title='SOBRE' icon={infoIcon} />
         </BottomNavigation>

@@ -12,16 +12,9 @@ import api from '../../services/api';
 const Home = () => {
   const navegacao = useNavigation();
   const [teste, setTeste] = useState("");
-  {useEffect(() => {
-    console.log("Entrou no Effect");
-    api.get('/').then(respostaAPI => {
-      setTeste(respostaAPI.data);
-    });
-  }, []);}
 
   function executaNavegacaoParaMapa() {
     navegacao.navigate("Map");
-    //navegacao.navigate("Map", {setores:setores});
   }
 
   return (
@@ -41,7 +34,6 @@ const Home = () => {
             ACESSAR
           </Button>
         </View>
-        <Text style={styles.textoRodape}>{teste}</Text>
         <Text style={styles.textoRodape}>Instituto Federal - Campus Muzambinho</Text>
       </View>
     </SafeAreaView>
